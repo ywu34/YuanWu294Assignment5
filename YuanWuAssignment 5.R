@@ -35,8 +35,8 @@ plot3<- ggplot(
   data = diamonds,
   aes(y = price, #x axis = price
       x = cut)) + #y axis = cut
-  geom_violin() + #violin plot
-  geom_jitter(alpha = 0.01) #jitter dot fill
+  geom_violin(size=1) + #violin plot
+  geom_jitter(alpha = 0.01,size = 3) #jitter dot fill
 plot3
 
 #Question 2
@@ -67,14 +67,13 @@ date = as.Date(date, format = "%Y-%m-%d")
 plot4<-ggplot(
   data=bymonth,
   aes(date)) + #x axis=date
-  geom_line(aes(y = median.rm)) + #line of median real wage, y axis=median real wage
+  geom_line(aes(y = median.rm), size=1) + #line of median real wage, y axis=median real wage
   geom_ribbon(aes(ymin = quar1st, ymax = quar3rd), alpha=0.4) + #ribbon for quartiles
   geom_ribbon(aes(ymin = decl1st, ymax = decl9th), alpha=0.2) + #ribbon for deciles
   ylim(0, 50) # y axis from 0 to 50
 plot4
 
 #b.
-bymonth2<-subset(org_example2, !is.na(educ))
 bymonth2<-org_example2 %>% 
   group_by(year,month,educ) %>% 
   mutate(
@@ -94,5 +93,5 @@ bymonth2<-bymonth2 %>%
 plot5<-ggplot(
   data=bymonth2,
   aes(x=date,y=median.rm)) +  
-  geom_line(aes(color=educ)) #line of median real wage, colored coded by education groups
+  geom_line(aes(color=educ),size=1) #line of median real wage, colored coded by education groups
 plot5
